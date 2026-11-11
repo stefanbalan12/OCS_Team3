@@ -11,7 +11,7 @@ def Shifted_Rotated_High_Conditioned_Elliptic(z):
     if D == 1:
         coefficients = np.array([1.0])
     else:
-        coefficients = 10**6 ** (np.arange(D) / (D - 1))
+        coefficients = (10**6) ** (np.arange(D) / (D - 1))
     return np.sum(coefficients * (z**2))
 
 def Shifted_Schwefel_Noise(z, rng=None):
