@@ -20,14 +20,14 @@ def run_one(alg, f, D, lo, hi, seed):
     ALGS[alg](o, np.random.default_rng(seed))
     return o.best_f, o.fe, o.trace
 
-
-rows = []
-for D in (5, 10):
-    F, (lo, hi) = make_cec05(D)
-    for fname, f in F.items():
-        for alg in ALGS:
-            for seed in range(1, 26):
-                err, fe, _ = run_one(alg, f, D, lo, hi, seed)
-                rows.append((alg, fname, D, seed, err, fe))
-df = pd.DataFrame(rows, columns=['alg', 'func', 'D', 'run', 'error', 'fe'])
-df.to_csv('l2_results.csv', index=False)
+if __name__ == '__main__':
+    rows = []
+    for D in (5, 10):
+        F, (lo, hi) = make_cec05(D)
+        for fname, f in F.items():
+            for alg in ALGS:
+                for seed in range(1, 26):
+                    err, fe, _ = run_one(alg, f, D, lo, hi, seed)
+                    rows.append((alg, fname, D, seed, err, fe))
+    df = pd.DataFrame(rows, columns=['alg', 'func', 'D', 'run', 'error', 'fe'])
+    df.to_csv('l2_results.csv', index=False)
