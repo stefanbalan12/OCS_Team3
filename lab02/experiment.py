@@ -4,6 +4,10 @@ from scipy.optimize import minimize
 from cec05 import make_cec05 #your code for CEC2005 or the
 from rs import pure_random_search, localized_random_search #implementations of RS an PRS
 
+import time
+
+
+
 def nm(o, rng): #nedler-mead
     x0 = rng.uniform(o.lb, o.ub)
     try:
@@ -21,6 +25,7 @@ def run_one(alg, f, D, lo, hi, seed):
     return o.best_f, o.fe, o.trace
 
 if __name__ == '__main__':
+    start = time.perf_counter()
     rows = []
     for D in (5, 10):
         F, (lo, hi) = make_cec05(D)
@@ -31,3 +36,6 @@ if __name__ == '__main__':
                     rows.append((alg, fname, D, seed, err, fe))
     df = pd.DataFrame(rows, columns=['alg', 'func', 'D', 'run', 'error', 'fe'])
     df.to_csv('l2_results.csv', index=False)
+
+    elapsed = time.perf_counter() - start
+    print(f"Runtime: {elapsed:.2f} s")
