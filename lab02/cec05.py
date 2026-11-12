@@ -28,6 +28,12 @@ def Schwefel_Global_Optimum_On_Bounds(x, o):
     B = A @ o
     return np.max(np.abs(A @ x - B))
 
+def Rastrigin(x):
+    # f(x) = 10D + sum(x_i^2 - 10 cos(2*pi*x_i)), global minimum f(0) = 0
+    x = np.asarray(x, dtype=float)
+    D = len(x)
+    return 10 * D + np.sum(x**2 - 10 * np.cos(2 * np.pi * x))
+
 
 def make_cec05(D, seed=42):
     rng = np.random.default_rng(seed)
@@ -50,6 +56,10 @@ def make_cec05(D, seed=42):
     
     lo, hi = -100.0, 100.0
     return functions, (lo, hi)
+
+def make_rastrigin():
+    lo, hi = -5.12, 5.12
+    return Rastrigin, (lo, hi)
 
 if __name__ == "__main__":
     for D in (5, 10):

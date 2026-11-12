@@ -7,7 +7,7 @@ F, (lo, hi) = make_cec05(D)
 MAXFE = 1000 * D              # matches your Oracle budget (handout says 10000 for D=10)
 
 plt.figure(figsize=(8, 5))
-for alg in ('NM', 'PRS', 'LRS'):
+for alg in ('NM', 'PRS', 'LRS', 'SW'):
     T = []
     for seed in range(1, 26):
         _, _, tr = run_one(alg, F[fname], D, lo, hi, seed)
